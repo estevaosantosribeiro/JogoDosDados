@@ -24,7 +24,7 @@
 
                 Console.Write("Deseja continuar? (S/N)");
                 string opcaoContinuar = Console.ReadLine()!.ToUpper();
-
+                
                 if (opcaoContinuar != "S")
                     break;
             }
