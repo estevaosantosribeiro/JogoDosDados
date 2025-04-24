@@ -8,7 +8,9 @@ internal class Program
 
         while (true)
         {
-            int posicaoUsuario = 0;
+            Jogador usuario = new Jogador();
+            usuario.posicao = 0;
+
             int posicaoComputador = 0;
 
             bool jogoEmAndamento = true;
@@ -19,37 +21,39 @@ internal class Program
 
                 menu.ExibirCabecalho();
 
-                int resultadoJogador = SortearDado();
+                LancadorDados lancadorDados = new LancadorDados();
 
-                menu.ExibirResultadoSorteio(resultadoJogador);
+                int resultadoUsuario = lancadorDados.Sortear();
 
-                posicaoUsuario += resultadoJogador;
+                menu.ExibirResultadoSorteio(resultadoUsuario);
 
-                menu.ExibirPosicaoJogador(limiteLinhaChegada, posicaoUsuario);
+                usuario.AvancarPosicao(resultadoUsuario);
 
-                if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
-                {
-                    menu.ExibirMensagemAvancoEspecial();
+                menu.ExibirPosicaoJogador(limiteLinhaChegada, usuario.posicao);
 
-                    posicaoUsuario += 3;
+                //if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
+                //{
+                //    menu.ExibirMensagemAvancoEspecial();
 
-                    menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
-                }
-                else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
-                {
-                    menu.ExibirMensagemRecuoEspecial();
+                //    posicaoUsuario += 3;
 
-                    posicaoUsuario -= 2;
-                    menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
-                }
+                //    menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
+                //}
+                //else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
+                //{
+                //    menu.ExibirMensagemRecuoEspecial();
 
-                if (posicaoUsuario >= limiteLinhaChegada)
-                {
-                    menu.ExibirMensagemVitoria();
+                //    posicaoUsuario -= 2;
+                //    menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
+                //}
 
-                    jogoEmAndamento = false;
-                    continue;
-                }
+                //if (posicaoUsuario >= limiteLinhaChegada)
+                //{
+                //    menu.ExibirMensagemVitoria();
+
+                //    jogoEmAndamento = false;
+                //    continue;
+                //}
 
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Rodada do Computador");
@@ -106,14 +110,5 @@ internal class Program
                 break;
         }
 
-    }
-
-    static int SortearDado()
-    {
-        Random geradorDeNumeros = new Random();
-
-        int resultado = geradorDeNumeros.Next(1, 7);
-
-        return resultado;
     }
 }
