@@ -8,6 +8,8 @@ internal class Program
 
         while (true)
         {
+            Menu menu = new Menu();
+            LancadorDados lancadorDados = new LancadorDados();
             Jogador usuario = new Jogador();
             usuario.posicao = 0;
 
@@ -17,11 +19,7 @@ internal class Program
 
             while (jogoEmAndamento)
             {
-                Menu menu = new Menu();
-
                 menu.ExibirCabecalho();
-
-                LancadorDados lancadorDados = new LancadorDados();
 
                 int resultadoUsuario = lancadorDados.Sortear();
 
@@ -31,29 +29,30 @@ internal class Program
 
                 menu.ExibirPosicaoJogador(limiteLinhaChegada, usuario.posicao);
 
-                //if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
-                //{
-                //    menu.ExibirMensagemAvancoEspecial();
+                if (usuario.EstaNaPosicaoAvancoEspecial())
+                {
+                    menu.ExibirMensagemAvancoEspecial();
 
-                //    posicaoUsuario += 3;
+                    usuario.AvancarPosicaoEspecial();
 
-                //    menu.ExibirPosicaoAvancoEspecial(posicaoUsuario);
-                //}
-                //else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20)
-                //{
-                //    menu.ExibirMensagemRecuoEspecial();
+                    menu.ExibirPosicaoAvancoEspecial(usuario.posicao);
+                }
+                else if (usuario.EstaNaPosicaoRecuoEspecial())
+                {
+                    menu.ExibirMensagemRecuoEspecial();
 
-                //    posicaoUsuario -= 2;
-                //    menu.ExibirPosicaoRecuoEspecial(posicaoUsuario);
-                //}
+                    usuario.RecuarPosicaoEspecial();
 
-                //if (posicaoUsuario >= limiteLinhaChegada)
-                //{
-                //    menu.ExibirMensagemVitoria();
+                    menu.ExibirPosicaoRecuoEspecial(usuario.posicao);
+                }
 
-                //    jogoEmAndamento = false;
-                //    continue;
-                //}
+                if (usuario.UltrapassouLinhaChegada(limiteLinhaChegada))
+                {
+                    menu.ExibirMensagemVitoria();
+
+                    jogoEmAndamento = false;
+                    continue;
+                }
 
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Rodada do Computador");
@@ -61,7 +60,7 @@ internal class Program
                 Console.Write("Pressione ENTER para visualizar a rodada do computador...");
                 Console.ReadLine();
 
-                int resultadoComputador = SortearDado();
+                int resultadoComputador = lancadorDados.Sortear();
 
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine($"O valor sorteado foi: {resultadoComputador}!");
