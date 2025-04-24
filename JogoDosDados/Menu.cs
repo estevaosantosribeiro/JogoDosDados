@@ -2,13 +2,13 @@
 
 public class Menu
 {
-    public void ExibirCabecalho()
+    public void ExibirCabecalho(string nome)
     {
         Console.Clear();
         Console.WriteLine("--------------------------------------");
         Console.WriteLine("Jogo dos Dados");
         Console.WriteLine("--------------------------------------");
-        Console.WriteLine("Rodada do Usuário");
+        Console.WriteLine($"Rodada do {nome}");
         Console.WriteLine("--------------------------------------");
         Console.Write("Pressione ENTER para lançar o dado...");
         Console.ReadLine();
@@ -21,11 +21,11 @@ public class Menu
     }
     public void ExibirPosicaoJogador(int limiteLinhaChegada, int posicaoUsuario)
     {
-        Console.WriteLine($"Você está na posição {posicaoUsuario} de {limiteLinhaChegada}");
+        Console.WriteLine($"O jogador está na posição {posicaoUsuario} de {limiteLinhaChegada}");
     }
     public void ExibirPosicaoAvancoEspecial(int posicaoUsuario)
     {
-        Console.WriteLine($"Você avançou para a posição: {posicaoUsuario}!");
+        Console.WriteLine($"O jogador avançou para a posição: {posicaoUsuario}!");
         Console.WriteLine("--------------------------------------");
     }
 
@@ -36,7 +36,7 @@ public class Menu
     }
     public void ExibirPosicaoRecuoEspecial(int posicaoUsuario)
     {
-        Console.WriteLine($"Você recuou para a posição: {posicaoUsuario}!");
+        Console.WriteLine($"O jogador recuou para a posição: {posicaoUsuario}!");
         Console.WriteLine("--------------------------------------");
     }
 
@@ -46,8 +46,8 @@ public class Menu
         Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
     }
 
-    public void ExibirMensagemVitoria()
+    public void ExibirMensagemVitoria(string nome)
     {
-        Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
+        Console.WriteLine($"Parabéns! {nome} alcançou a linha de chegada!");
     }
 }

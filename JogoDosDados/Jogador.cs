@@ -3,6 +3,12 @@
 public class Jogador
 {
     public int posicao;
+    public string nome;
+
+    public Jogador (string nome)
+    {
+        this.nome = nome;
+    }
 
     public void AvancarPosicao(int resultadoLancamento)
     {
